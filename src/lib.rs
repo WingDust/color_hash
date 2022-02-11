@@ -1,8 +1,7 @@
 extern crate wasm_bindgen;
 
-use wasm_bindgen::prelude::*;
-
 use sha2::{Digest, Sha256};
+use wasm_bindgen::prelude::*;
 
 /// 函数式的 pipe
 fn pipe3<A, B, C, D>(fn1: fn(A) -> B, fn2: fn(B) -> C, fn3: fn(C) -> D) -> impl Fn(A) -> D {
