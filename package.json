@@ -1,0 +1,11 @@
+{
+	"scripts": {
+		"dev": "vite",
+		"wasm": "~/.cargo/bin/wasm-pack build color_hash --target web"
+	},
+	"devDependencies": {
+		"color-hash": "^2.0.1",
+		"vite": "^2.8.1",
+		"vite-plugin-wasm-pack": "^0.1.9"
+	}
+}
