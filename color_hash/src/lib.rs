@@ -3,6 +3,10 @@ extern crate wasm_bindgen;
 use sha2::{Digest, Sha256};
 use wasm_bindgen::prelude::*;
 
+#[allow(dead_code)]
+fn pipe<A, B, C>(fn1: fn(A) -> B, fn2: fn(B) -> C) -> impl Fn(A) -> C {
+    move |x: A| fn2(fn1(x))
+}
 /// 函数式的 pipe
 fn pipe3<A, B, C, D>(fn1: fn(A) -> B, fn2: fn(B) -> C, fn3: fn(C) -> D) -> impl Fn(A) -> D {
     move |x: A| fn3(fn2(fn1(x)))
@@ -81,8 +85,51 @@ fn hsl(s1: String) -> [f64; 3] {
     [h, s, l]
 }
 
+/// get a &str return a color string
+/// # Examples
+/// ```
+/// assert_eq!(color_hash_hex("w"),"#d27997".to_string());
+/// ```
 #[wasm_bindgen]
 pub fn color_hash_hex(s: &str) -> String {
     let exec = pipe3(hsl, hsl2rgb, rgb2hex);
     exec(s.to_string())
+}
+/// get a &str return a color rgb array
+/// # Examples
+/// ```
+/// assert_eq!(color_hash_rgb("w"),[210,121,151]);
+/// ```
+#[allow(dead_code)]
+pub fn color_hash_rgb(s: &str) -> [u8; 3] {
+    let exec = pipe(hsl, hsl2rgb);
+    exec(s.to_string())
+}
+/// get a &str return a color hsl array
+/// # Examples
+/// ```
+/// assert_eq!(color_hash_hsl("w"),[340.0,0.5,0.65]);
+/// ```
+#[allow(dead_code)]
+pub fn color_hash_hsl(s: &str) -> [f64; 3] {
+    hsl(s.to_string())
+}
+
+mod tests{
+use super::*;
+
+    #[test]
+    fn hex(){
+ assert_eq!(color_hash_hex("w"),"#d27997".to_string()) 
+    }
+    #[test]
+    fn rgb(){
+        // dbg!(color_hash_rgb("w"));
+        assert_eq!(color_hash_rgb("w"),[210,121,151]);
+    }
+    #[test]
+    fn hsl(){
+        // dbg!(color_hash_hsl("w"));
+        assert_eq!(color_hash_hsl("w"),[340.0,0.5,0.65]);
+    }
 }

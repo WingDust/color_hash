@@ -2,6 +2,13 @@
 name = "color_hash"
 version = "0.1.0"
 edition = "2021"
+authors = ["wingdust <https://github.com/WingDust>"]
+description = "use string generate color-string with Rust,WebAssembly and sha256"
+readme = "README.md"
+categories = ["hash", "color", "wasm"]
+repository = "https://github.com/WingDust/color_hash"
+include = ["License","/src/**/*.rs","/Cargo.toml"]
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -14,3 +21,9 @@ sha2 = "0.10"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.13"
+
+[profile.release]
+lto = true
+opt-level = 's'
+# [非常奇怪的是opt-level = "s"有时得到比opt-level = "z"更小的结果。永远要测量！](https://pearzl.gitbooks.io/rustwasm-book-zh/content/reference/code-size.html)
+# opt-level = 'z'

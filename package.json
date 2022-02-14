@@ -1,7 +1,8 @@
 {
 	"scripts": {
 		"dev": "vite",
-		"wasm": "~/.cargo/bin/wasm-pack build color_hash --target web"
+		"wasm": "~/.cargo/bin/wasm-pack build color_hash --target web",
+		"release": "~/.cargo/bin/wasm-pack build color_hash --target web --release --scope wingdust"
 	},
 	"devDependencies": {
 		"color-hash": "^2.0.1",
