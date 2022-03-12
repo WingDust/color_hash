@@ -4,10 +4,11 @@
 - color_hash is rust wasm version.
 - color_hash use litter functionial trick.
 - rust wasm version color_hash can't not customize ,unless modify source code and compile.
+- npm location [@wingdust/color_hash](https://www.npmjs.com/package/@wingdust/color_hash)
 
 
 ## for Rustacean
-- color_hash actually also can use in rust code.
+- [color_hash](https://crates.io/crates/color_hash) actually also can use in rust code.
 
 ## test
 - `npm install`
